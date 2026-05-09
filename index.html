@@ -1,1 +1,353 @@
 
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>David & Emelie 🌿</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #F4F7F2;
+      --warm-white: #FAFCF8;
+      --green: #3A6B44;
+      --green-dark: #254830;
+      --green-mid: #5A8F67;
+      --green-light: #C8DFC9;
+      --green-pale: #EAF2EB;
+      --yellow-light: #FDF5DC;
+      --text: #121A13;
+      --muted: #5A6B5C;
+      --border: rgba(0,0,0,0.08);
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    .hero {
+      background: var(--green);
+      color: white;
+      text-align: center;
+      padding: 3.5rem 1.5rem 4.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        60deg, transparent, transparent 50px,
+        rgba(255,255,255,0.03) 50px, rgba(255,255,255,0.03) 100px
+      );
+    }
+
+    .leaves { font-size: 1.8rem; letter-spacing: 6px; margin-bottom: 1.2rem; position: relative; }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 8vw, 3.4rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 0.5rem;
+      position: relative;
+    }
+
+    .hero .subtitle {
+      font-size: 0.82rem;
+      font-weight: 300;
+      opacity: 0.65;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero .lego-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 30px;
+      padding: 0.4rem 1.1rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      position: relative;
+    }
+
+    .wave { width: 100%; overflow: hidden; line-height: 0; background: var(--cream); }
+    .wave svg { display: block; width: 100%; height: 60px; }
+
+    .content { max-width: 580px; margin: 0 auto; padding: 1.75rem 1.5rem 5rem; }
+
+    .greeting-card {
+      background: var(--warm-white);
+      border: 1px solid var(--green-light);
+      border-left: 4px solid var(--green);
+      border-radius: 12px;
+      padding: 1.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .greeting-card p { font-size: 0.95rem; line-height: 1.8; color: var(--text); }
+
+    .greeting-card .signature {
+      margin-top: 1.1rem;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: var(--green-dark);
+      font-size: 1rem;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green-mid);
+      margin-bottom: 0.9rem;
+    }
+
+    .rules { display: flex; flex-direction: column; gap: 10px; margin-bottom: 2.5rem; }
+
+    .rule {
+      background: var(--warm-white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .rule-num {
+      width: 30px; height: 30px;
+      border-radius: 8px;
+      background: var(--green);
+      color: white;
+      font-weight: 500;
+      font-size: 0.82rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .rule-text strong { display: block; font-weight: 500; margin-bottom: 0.2rem; font-size: 0.93rem; }
+    .rule-text span { color: var(--muted); font-size: 0.865rem; line-height: 1.55; }
+
+    .steps { display: flex; flex-direction: column; margin-bottom: 2.5rem; }
+
+    .step { display: flex; gap: 1rem; }
+
+    .step-left { display: flex; flex-direction: column; align-items: center; width: 38px; flex-shrink: 0; }
+
+    .step-circle {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem; font-weight: 700; flex-shrink: 0;
+    }
+
+    .step:nth-child(odd) .step-circle { background: var(--green-pale); color: var(--green-dark); }
+    .step:nth-child(even) .step-circle { background: var(--yellow-light); color: #7A5A10; }
+
+    .step-line { width: 2px; flex: 1; background: var(--green-light); min-height: 20px; }
+    .step:last-child .step-line { display: none; }
+
+    .step-content { padding-bottom: 1.6rem; padding-top: 5px; flex: 1; }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.68rem; font-weight: 500;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      padding: 2px 8px; border-radius: 20px; margin-bottom: 5px;
+    }
+
+    .tag.david { background: var(--green-pale); color: var(--green-dark); }
+    .tag.emelie { background: var(--yellow-light); color: #7A5A10; }
+    .tag.together { background: var(--green-light); color: var(--green-dark); }
+
+    .step-content strong { display: block; font-weight: 500; font-size: 0.93rem; margin-bottom: 0.25rem; }
+    .step-content p { color: var(--muted); font-size: 0.865rem; line-height: 1.6; }
+
+    .closing {
+      background: var(--green);
+      border-radius: 16px;
+      padding: 2rem 1.75rem;
+      color: white;
+      text-align: center;
+    }
+
+    .closing .plant-emoji { font-size: 1.8rem; margin-bottom: 0.75rem; }
+
+    .closing h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; font-style: italic;
+      margin-bottom: 0.75rem; line-height: 1.45;
+    }
+
+    .closing p { opacity: 0.82; font-size: 0.88rem; line-height: 1.7; }
+
+    @media (max-width: 420px) {
+      .content { padding: 1.25rem 1rem 4rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="leaves">🌿 🌱 🌿</div>
+  <h1>David & Emelie</h1>
+  <div class="subtitle">Rocking Plants — Botanicals</div>
+  <div class="lego-badge">🧱 Ett lego-äventyr för två</div>
+</div>
+
+<div class="wave">
+  <svg viewBox="0 0 1200 60" preserveAspectRatio="none">
+    <path d="M0,0 C300,60 900,0 1200,60 L1200,0 L0,0 Z" fill="#3A6B44"/>
+  </svg>
+</div>
+
+<div class="content">
+
+  <div class="greeting-card">
+    <p>
+      Grattis till er! Gud vare med er på den här resan ni nu påbörjar ihop.<br><br>
+      Äktenskapet handlar om teamwork — så långt jag har förstått det iallfall. Och nu har ni fått ett lego-paket som ska byggas tillsammans. Det är inte bara David som ska trycka ihop alla bitar, och inte bara Emelie heller. Utan ni båda. För det är också vad ni behöver göra i riktiga livet.<br><br>
+      Ha det jättekul. Ta pauser om det behövs.
+    </p>
+    <div class="signature">Varma hälsningar, Pär 🌿</div>
+  </div>
+
+  <div class="section-label">Reglerna</div>
+  <div class="rules">
+
+    <div class="rule">
+      <div class="rule-num">1</div>
+      <div class="rule-text">
+        <strong>Ni börjar ihop</strong>
+        <span>Första biten håller ni i tillsammans — båda två. Tryck ner den samtidigt. Det är startskottet.</span>
+      </div>
+    </div>
+
+    <div class="rule">
+      <div class="rule-num">2</div>
+      <div class="rule-text">
+        <strong>Varannan bit</strong>
+        <span>David lägger en bit, Emelie lägger en bit. Sedan David igen. Ingen lägger två i rad.</span>
+      </div>
+    </div>
+
+    <div class="rule">
+      <div class="rule-num">3</div>
+      <div class="rule-text">
+        <strong>Ni läser instruktionerna ihop</strong>
+        <span>Ingen enskild expert. Ni tolkar varje steg gemensamt innan ni agerar.</span>
+      </div>
+    </div>
+
+    <div class="rule">
+      <div class="rule-num">4</div>
+      <div class="rule-text">
+        <strong>Ta pauser om det behövs</strong>
+        <span>Inget stress. Om ni fastnar — ta en paus, drick något, och börja om med friska ögon.</span>
+      </div>
+    </div>
+
+    <div class="rule">
+      <div class="rule-num">5</div>
+      <div class="rule-text">
+        <strong>Sista biten — ihop</strong>
+        <span>Håll den sista biten tillsammans. Tryck ner den samtidigt. Ni är klara. En ny tradition är född.</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section-label">Hur ni gör det</div>
+  <div class="steps">
+
+    <div class="step">
+      <div class="step-left">
+        <div class="step-circle">1</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-content">
+        <div class="tag together">Tillsammans</div>
+        <strong>Öppna förpackningen</strong>
+        <p>Ta ut allt och sortera bitarna på bordet. Gör det ihop — det är en del av upplevelsen.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-left">
+        <div class="step-circle">2</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-content">
+        <div class="tag together">Tillsammans</div>
+        <strong>Första biten — båda håller i</strong>
+        <p>Hitta bit nummer ett. Håll den ihop och tryck ner den samtidigt. Nu är ni igång.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-left">
+        <div class="step-circle">3</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-content">
+        <div class="tag david">David</div>
+        <strong>Lägger nästa bit</strong>
+        <p>David fortsätter. Sedan Emelie. Sedan David. Varannan hela vägen igenom.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-left">
+        <div class="step-circle">4</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-content">
+        <div class="tag together">Tillsammans</div>
+        <strong>Fortsätt — en bit i taget</strong>
+        <p>Prata med varandra. Skratta när det går snett. Det hör till. Ingen stress.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-left">
+        <div class="step-circle">5</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-content">
+        <div class="tag together">Avslutning</div>
+        <strong>Sista biten — båda håller i</strong>
+        <p>Håll den sista biten tillsammans. Tryck ner den samtidigt. Ni är klara. 🌿</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="closing">
+    <div class="plant-emoji">🌱 🌿 🌱</div>
+    <h3>"Det ni bygger ihop håller längre."</h3>
+    <p>Grattis David & Emelie. Gud vare med er.<br><br>
+    Det här är ert första gemensamma byggprojekt — men långt ifrån det sista.<br><br>
+    Varma hälsningar, Pär 🤍</p>
+  </div>
+
+</div>
+</body>
+</html>
